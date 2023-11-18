@@ -1,0 +1,35 @@
+﻿@page "/armadura/{slug}/{id:int:min(1)}"
+@model ReinosAcoWebApp.Pages.DetailsModel
+
+<h2 class="my-3">@Model.Armadura.Nome</h2>
+
+<div class="row">
+
+    <div class="col-4">
+        <img class="img-fluid rounded" src="@Model.Armadura.ImgUri"/>
+    </div>
+
+    <div class="col-6">
+        <h4 class="my-3">Sobre:</h4>
+        <p>@Model.Armadura.Descricao</p>
+        <h4 class="my-3">Mais info:</h4>
+        <ul>
+            <li>
+                <label asp-for="Armadura.Preco"></label>: 
+                @Html.DisplayFor(model => model.Armadura.Preco)
+            </li>
+            <li>
+                <label asp-for="Armadura.EntregaExpressa"></label>:
+                @Html.DisplayFor(model => model.Armadura.EntregaExpressaFormatada)
+            </li>
+            <li>
+                <label asp-for="Armadura.DataCadastro"></label>:
+                @Html.DisplayFor(model => model.Armadura.DataCadastro)
+            </li>
+        </ul>
+        <a class="btn my-3 btn-primary"
+        asp-page="/Edit"
+        asp-route-id="@Model.Armadura.ArmaduraId">Editar</a>
+    </div>
+
+</div>

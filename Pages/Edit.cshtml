@@ -1,0 +1,55 @@
+﻿@page
+@model ReinosAcoWebApp.Pages.EditModel
+
+<div class="row pt-5">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Alteração de Armadura</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Armadura.ArmaduraId" />
+
+            <div class="form-group">
+                <label asp-for="Armadura.Nome" class="form-label"></label>
+                <input asp-for="Armadura.Nome" class="form-control" />
+                <span asp-validation-for="Armadura.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Armadura.Descricao" class="form-label  mt-3"></label>
+                <input asp-for="Armadura.Descricao" class="form-control" />
+                <span asp-validation-for="Armadura.Descricao" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="Armadura.ImgUri" class="form-label  mt-3"></label>
+                <input asp-for="Armadura.ImgUri" class="form-control" />
+                <span asp-validation-for="Armadura.ImgUri" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Armadura.Preco" class="form-label  mt-3"></label>
+                <input asp-for="Armadura.Preco" class="form-control" />
+                <span asp-validation-for="Armadura.Preco" class="text-danger"></span>
+            </div>
+
+            <div class="form-group  mt-3">
+                <input class="form-check-input" asp-for="Armadura.EntregaExpressa" />
+                <label asp-for="Armadura.EntregaExpressa"></label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Armadura.DataCadastro" class="form-label mt-3"></label>
+                <input asp-for="Armadura.DataCadastro" class="form-control" />
+                <span asp-validation-for="Armadura.DataCadastro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

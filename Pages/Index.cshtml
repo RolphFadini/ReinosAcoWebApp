@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+
+<div class="text-center">
+    <h1 class="display-4">Bem-vindo(a)</h1>
+    <p class="fst-italic">Armaduras que Contam Histórias.</p>
+</div>
+
+<div>
+    <h3 class="margin-100 text-center welcome-text">Bem-vindo à Reinos & Aço, o seu portal para uma viagem à era dos cavaleiros e castelos. Aqui, você encontrará uma seleção excepcional de armaduras medievais autênticas, acessórios e muito mais.</h3>
+</div>
+
+<hr class="margin-100"/>
+
+<div class="row justify-content-md-center margin-100">
+
+    @foreach (var item in Model.ListaArmadura)
+    {
+        <div class="card col-3 m-3">
+            <img src="@item.ImgUri" class="p-3 fit-img" style="border-radius: 25px" />
+            <div class="card-body">
+                <h5 class="card-title">@item.Nome</h5>
+                <p class="card-text">@item.Descricao</p>
+            </div>
+            <div class="m-3">
+                <a class="btn btn-primary"
+                   asp-page="/Details"
+                   asp-route-slug="@item.NomeSlug"
+                   asp-route-id="@item.ArmaduraId">Ver mais</a>
+            </div>
+        </div>
+    }
+</div>

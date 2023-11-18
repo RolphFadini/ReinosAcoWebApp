@@ -1,0 +1,56 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+.list-first-item {
+    font-weight: bold;
+}
+
+.margin-100 {
+    margin-top: 100px;
+}
+
+.margin-200 {
+    margin-top: 200px;
+}
+
+.margin-50 {
+    margin-top: 50px;
+}
+
+.last-text {
+    font-size: 13px;
+}
+
+.welcome-text {
+    font-weight: 200;
+}
+
+.fit-img {
+    width: auto;
+    height: 400px;
+    object-fit: cover;
+}
