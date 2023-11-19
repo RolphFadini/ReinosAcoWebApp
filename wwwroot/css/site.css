@@ -52,5 +52,6 @@ h2 {
 .fit-img {
     width: auto;
     height: 400px;
+    min-width: 100px;
     object-fit: cover;
 }
