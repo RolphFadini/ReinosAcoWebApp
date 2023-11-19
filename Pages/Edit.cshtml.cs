@@ -43,5 +43,13 @@ namespace ReinosAcoWebApp.Pages
 
             return RedirectToPage("/Index");
         }
+
+        public IActionResult OnPostExclusao()
+        {
+            //exclusão
+            _service.Excluir(Armadura.ArmaduraId);
+
+            return RedirectToPage("/Index");
+        }
     }
 }
