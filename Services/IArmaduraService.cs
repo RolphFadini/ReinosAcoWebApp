@@ -8,4 +8,5 @@ public interface IArmaduraService
     Armadura Obter(int id);
     void Incluir(Armadura armadura);
     void Alterar(Armadura armadura);
+    void Excluir(int id);
 }

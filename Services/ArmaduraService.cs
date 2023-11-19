@@ -88,4 +88,10 @@ public class ArmaduraService : IArmaduraService
         armaduraEncontrada.DataCadastro = armadura.DataCadastro;
         armaduraEncontrada.ImgUri = armadura.ImgUri;
     }
+
+    public void Excluir(int id)
+    {
+        var armaduraEncontrada = Obter(id);
+        _armaduras.Remove(armaduraEncontrada);
+    }
 }
