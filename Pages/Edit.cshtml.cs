@@ -41,6 +41,8 @@ namespace ReinosAcoWebApp.Pages
             //alteração
             _service.Alterar(Armadura);
 
+            TempData["TempMensagemSucesso"] = true;
+
             return RedirectToPage("/Index");
         }
 
@@ -48,6 +50,8 @@ namespace ReinosAcoWebApp.Pages
         {
             //exclusão
             _service.Excluir(Armadura.ArmaduraId);
+
+            TempData["TempMensagemSucesso"] = true;
 
             return RedirectToPage("/Index");
         }

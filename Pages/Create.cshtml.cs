@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ReinosAcoWebApp.Models;
 using ReinosAcoWebApp.Services;
+using System.Dynamic;
 
 namespace ReinosAcoWebApp.Pages
 {
@@ -27,7 +28,14 @@ namespace ReinosAcoWebApp.Pages
             //inclusão
             _service.Incluir(Armadura);
 
+            TempData["TempMensagemSucesso"] = true;
+
             return RedirectToPage("/Index");  
+        }
+
+        public void OnGet()
+        {
+            ViewData["Title"] = "Inclusão";
         }
     }
 }

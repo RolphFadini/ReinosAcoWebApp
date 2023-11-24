@@ -17,7 +17,7 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        ViewData["Title"] = "Reinos & Aço";
+        ViewData["Title"] = "Página inicial";
 
         ListaArmadura = _service.ObterTodos();
     }

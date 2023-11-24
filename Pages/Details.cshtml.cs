@@ -18,7 +18,7 @@ namespace ReinosAcoWebApp.Pages
 
         public IActionResult OnGet(int id)
         {
-            ViewData["Title"] = "Detalhes - Reinos & Aço";
+            ViewData["Title"] = "Detalhes";
 
             Armadura = _service.Obter(id);
 
