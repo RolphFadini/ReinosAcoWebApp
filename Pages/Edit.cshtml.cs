@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ReinosAcoWebApp.Models;
 using ReinosAcoWebApp.Services;
 
@@ -7,6 +8,7 @@ namespace ReinosAcoWebApp.Pages
 {
     public class EditModel : PageModel
     {
+        public SelectList AutenticidadeOptionItems { get; set; }
         private IArmaduraService _service;
 
         public EditModel(IArmaduraService service)
@@ -27,6 +29,10 @@ namespace ReinosAcoWebApp.Pages
             {
                 return NotFound();
             }
+
+            AutenticidadeOptionItems = new SelectList(_service.ObterTodasAutenticidades(),
+                                                        nameof(Autenticidade.AutenticidadeId),
+                                                        nameof(Autenticidade.Descricao));
 
             return Page();
         }

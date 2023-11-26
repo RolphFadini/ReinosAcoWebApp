@@ -5,7 +5,7 @@ using ReinosAcoWebApp.Services;
 namespace ReinosAcoWebApp.Pages;
 
 public class IndexModel : PageModel
-{
+{  
     private IArmaduraService _service;
 
     public IndexModel(IArmaduraService service)
