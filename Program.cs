@@ -1,4 +1,6 @@
+using ReinosAcoWebApp.Data;
 using ReinosAcoWebApp.Services;
+using ReinosAcoWebApp.Services.Data;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddSingleton<IArmaduraService, ArmaduraService>();
+builder.Services.AddTransient<IArmaduraService, ArmaduraService>();
+builder.Services.AddDbContext<ArmaduraDbContext>();
 
 var app = builder.Build();
 

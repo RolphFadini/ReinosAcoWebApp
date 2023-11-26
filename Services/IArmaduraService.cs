@@ -9,4 +9,5 @@ public interface IArmaduraService
     void Incluir(Armadura armadura);
     void Alterar(Armadura armadura);
     void Excluir(int id);
+    IList<Autenticidade> ObterTodasAutenticidades();    
 }

@@ -1,6 +1,6 @@
 ﻿using ReinosAcoWebApp.Models;
 
-namespace ReinosAcoWebApp.Services;
+namespace ReinosAcoWebApp.Services.Memory;
 
 public class ArmaduraService : IArmaduraService
 {
@@ -17,7 +17,7 @@ public class ArmaduraService : IArmaduraService
                 ArmaduraId = 1,
                 Nome = "Armet Helmet",
                 Descricao = "Elmo Armet, um tesouro do século XV. Originado na Itália, resistiu ao teste do tempo. Uma peça que conta histórias de batalhas e bravura.",
-                ImgUri = "/images/Armet-armor.jpg",
+                ImgUri = "/images/Armet-helmet.jpg",
                 Preco = 50.00,
                 EntregaExpressa = true,
                 DataCadastro = DateTime.Now
@@ -37,7 +37,7 @@ public class ArmaduraService : IArmaduraService
                 ArmaduraId = 3,
                 Nome = "Cabasset Helmet",
                 Descricao = "Cabasset Helmet, século XVII, Espanha. Uma relíquia que presenciou as guerras de conquista. Sinta o peso da história em cada detalhe.",
-                ImgUri = "/images/Cabasset-armor.jpg",
+                ImgUri = "/images/Cabasset-helmet.jpg",
                 Preco = 49.00,
                 EntregaExpressa = true,
                 DataCadastro = DateTime.Now
@@ -57,7 +57,7 @@ public class ArmaduraService : IArmaduraService
                 ArmaduraId = 5,
                 Nome = "Morion Helmet",
                 Descricao = "Morion Helmet, do século XVI, teve origem na Espanha. Usado por soldados que exploraram os confins do Novo Mundo. Uma herança de coragem.",
-                ImgUri = "/images/Morion-armor.jpg",
+                ImgUri = "/images/Morion-helmet.jpg",
                 Preco = 39.35,
                 EntregaExpressa = false,
                 DataCadastro = DateTime.Now
@@ -93,5 +93,10 @@ public class ArmaduraService : IArmaduraService
     {
         var armaduraEncontrada = Obter(id);
         _armaduras.Remove(armaduraEncontrada);
+    }
+
+    public IList<Autenticidade> ObterTodasAutenticidades()
+    {
+        throw new NotImplementedException();
     }
 }
