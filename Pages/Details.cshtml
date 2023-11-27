@@ -26,6 +26,11 @@
                 <label asp-for="Armadura.DataCadastro"></label>:
                 @Html.DisplayFor(model => model.Armadura.DataCadastro)
             </li>
+            
+            <li>
+                <label asp-for="Armadura.AutenticidadeId"></label>:
+                @Html.DisplayFor(model => model.DescricaoAutenticidade)
+            </li>
         </ul>
         <a class="btn my-3 btn-primary"
         asp-page="/Edit"

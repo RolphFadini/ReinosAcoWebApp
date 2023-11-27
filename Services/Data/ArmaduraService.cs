@@ -51,4 +51,6 @@ public class ArmaduraService : IArmaduraService
     }
 
     public IList<Autenticidade> ObterTodasAutenticidades() => _context.Autenticidade.ToList();
+
+    public Autenticidade ObterAutenticidade(int id) => _context.Autenticidade.SingleOrDefault(item => item.AutenticidadeId == id);
 }

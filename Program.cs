@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ReinosAcoWebApp.Data;
 using ReinosAcoWebApp.Services;
 using ReinosAcoWebApp.Services.Data;
@@ -25,6 +26,9 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 {
     SupportedCultures = new[] { new CultureInfo("pt-BR") },
 });
+
+var context = new ArmaduraDbContext();
+context.Database.Migrate();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

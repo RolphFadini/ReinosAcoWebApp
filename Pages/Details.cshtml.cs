@@ -3,31 +3,41 @@ using Microsoft.AspNetCore.Mvc;
 using ReinosAcoWebApp.Models;
 using ReinosAcoWebApp.Services;
 
-namespace ReinosAcoWebApp.Pages
+namespace ReinosAcoWebApp.Pages;
+
+public class DetailsModel : PageModel
 {
-    public class DetailsModel : PageModel
+    private IArmaduraService _service;
+    public string DescricaoAutenticidade { get; set; } 
+
+    public DetailsModel(IArmaduraService service)
     {
-        private IArmaduraService _service;
+        _service = service;
+    }
 
-        public DetailsModel(IArmaduraService service)
+    public Armadura Armadura { get; private set; }
+
+    public IActionResult OnGet(int id)
+    {
+        ViewData["Title"] = "Detalhes";
+
+        Armadura = _service.Obter(id);
+
+        if (Armadura.AutenticidadeId != null)
         {
-            _service = service;
+            DescricaoAutenticidade = _service.ObterAutenticidade(Armadura.AutenticidadeId.Value).Descricao;
+        }
+        else
+        {
+            DescricaoAutenticidade = "Em análise";
         }
 
-        public Armadura Armadura { get; private set; }
 
-        public IActionResult OnGet(int id)
+        if (Armadura == null)
         {
-            ViewData["Title"] = "Detalhes";
-
-            Armadura = _service.Obter(id);
-
-            if(Armadura == null)
-            {
-                return NotFound();
-            }
-
-            return Page();
+            return NotFound();
         }
+
+        return Page();
     }
 }
