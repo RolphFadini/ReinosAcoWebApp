@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReinosAcoWebApp.Data;
@@ -12,52 +11,46 @@ using ReinosAcoWebApp.Data;
 namespace ReinosAcoWebApp.Data.Migrations
 {
     [DbContext(typeof(ArmaduraDbContext))]
-    [Migration("20231126202518_AdicionarRelacionamentoArmaduraAutenticidade")]
-    partial class AdicionarRelacionamentoArmaduraAutenticidade
+    [Migration("20231203183304_AdicionarMigrationsTotal")]
+    partial class AdicionarMigrationsTotal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
             modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>
                 {
                     b.Property<int>("ArmaduraId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArmaduraId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("AutenticidadeId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EntregaExpressa")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImgUri")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("ArmaduraId");
 
@@ -70,13 +63,11 @@ namespace ReinosAcoWebApp.Data.Migrations
                 {
                     b.Property<int>("AutenticidadeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AutenticidadeId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("AutenticidadeId");
 

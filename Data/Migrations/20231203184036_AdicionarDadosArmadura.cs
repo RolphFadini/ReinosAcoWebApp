@@ -1,12 +1,12 @@
-﻿using ReinosAcoWebApp.Models;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using ReinosAcoWebApp.Models;
 
 #nullable disable
 
 namespace ReinosAcoWebApp.Data.Migrations;
 
 /// <inheritdoc />
-public partial class AdicionarDadosIniciaisArmadura : Migration
+public partial class AdicionarDadosArmadura : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)

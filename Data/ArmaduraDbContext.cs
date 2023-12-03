@@ -15,8 +15,9 @@ public class ArmaduraDbContext : DbContext
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var stringConn = config.GetConnectionString("StringConn");
+        //var stringConn = config.GetConnectionString("StringConn");
+        var stringConn = config.GetConnectionString("StringConn1");
 
-        optionsBuilder.UseSqlServer(stringConn);
+        optionsBuilder.UseSqlite(stringConn);
     }
 }

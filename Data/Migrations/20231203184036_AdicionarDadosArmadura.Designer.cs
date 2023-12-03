@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReinosAcoWebApp.Data;
@@ -12,51 +11,50 @@ using ReinosAcoWebApp.Data;
 namespace ReinosAcoWebApp.Data.Migrations
 {
     [DbContext(typeof(ArmaduraDbContext))]
-    [Migration("20231126201209_AdicionarDadosIniciaisAutenticidade")]
-    partial class AdicionarDadosIniciaisAutenticidade
+    [Migration("20231203184036_AdicionarDadosArmadura")]
+    partial class AdicionarDadosArmadura
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.14")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
 
             modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>
                 {
                     b.Property<int>("ArmaduraId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArmaduraId"));
+                    b.Property<int?>("AutenticidadeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EntregaExpressa")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ImgUri")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("ArmaduraId");
+
+                    b.HasIndex("AutenticidadeId");
 
                     b.ToTable("Armadura");
                 });
@@ -65,17 +63,27 @@ namespace ReinosAcoWebApp.Data.Migrations
                 {
                     b.Property<int>("AutenticidadeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AutenticidadeId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("AutenticidadeId");
 
                     b.ToTable("Autenticidade");
+                });
+
+            modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>
+                {
+                    b.HasOne("ReinosAcoWebApp.Models.Autenticidade", null)
+                        .WithMany("Armaduras")
+                        .HasForeignKey("AutenticidadeId");
+                });
+
+            modelBuilder.Entity("ReinosAcoWebApp.Models.Autenticidade", b =>
+                {
+                    b.Navigation("Armaduras");
                 });
 #pragma warning restore 612, 618
         }
