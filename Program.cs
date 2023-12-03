@@ -1,10 +1,18 @@
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using ReinosAcoWebApp.Data;
 using ReinosAcoWebApp.Services;
 using ReinosAcoWebApp.Services.Data;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages()
+                .AddNToastNotifyToastr(new ToastrOptions()
+{
+    ProgressBar = true,
+    PositionClass = ToastPositions.BottomRight
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -34,6 +42,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseNToastNotify();
 
 app.UseAuthorization();
 

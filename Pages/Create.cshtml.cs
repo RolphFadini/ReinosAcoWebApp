@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NToastNotify;
 using ReinosAcoWebApp.Models;
 using ReinosAcoWebApp.Services;
 using System.Dynamic;
@@ -11,10 +12,13 @@ public class CreateModel : PageModel
 {
     public SelectList AutenticidadeOptionItems { get; set; }
     private IArmaduraService _service;
+    private IToastNotification _toastNotification { get; set; }
 
-    public CreateModel(IArmaduraService service) 
+    public CreateModel(IArmaduraService service,
+                       IToastNotification toastNotification) 
     {
         _service = service;
+        _toastNotification = toastNotification;
     }
 
     public void OnGet()
@@ -39,7 +43,7 @@ public class CreateModel : PageModel
         //inclusão
         _service.Incluir(Armadura);
 
-        TempData["TempMensagemSucesso"] = true;
+        _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
         return RedirectToPage("/Index");  
     }

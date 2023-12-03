@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NToastNotify;
 using ReinosAcoWebApp.Models;
 using ReinosAcoWebApp.Services;
 
@@ -10,10 +11,13 @@ namespace ReinosAcoWebApp.Pages
     {
         public SelectList AutenticidadeOptionItems { get; set; }
         private IArmaduraService _service;
+        private IToastNotification _toastNotification { get; set; } 
 
-        public EditModel(IArmaduraService service)
+        public EditModel(IArmaduraService service,
+                         IToastNotification toastNotification)
         {
             _service = service;
+            _toastNotification = toastNotification;
         }
 
         [BindProperty]
@@ -47,7 +51,7 @@ namespace ReinosAcoWebApp.Pages
             //alteração
             _service.Alterar(Armadura);
 
-            TempData["TempMensagemSucesso"] = true;
+            _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
             return RedirectToPage("/Index");
         }
@@ -57,7 +61,7 @@ namespace ReinosAcoWebApp.Pages
             //exclusão
             _service.Excluir(Armadura.ArmaduraId);
 
-            TempData["TempMensagemSucesso"] = true;
+            _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
             return RedirectToPage("/Index");
         }
