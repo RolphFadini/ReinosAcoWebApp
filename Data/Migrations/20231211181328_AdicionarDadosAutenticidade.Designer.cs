@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReinosAcoWebApp.Data;
@@ -11,46 +12,52 @@ using ReinosAcoWebApp.Data;
 namespace ReinosAcoWebApp.Data.Migrations
 {
     [DbContext(typeof(ArmaduraDbContext))]
-    [Migration("20231203183304_AdicionarMigrationsTotal")]
-    partial class AdicionarMigrationsTotal
+    [Migration("20231211181328_AdicionarDadosAutenticidade")]
+    partial class AdicionarDadosAutenticidade
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.14")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>
                 {
                     b.Property<int>("ArmaduraId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArmaduraId"));
 
                     b.Property<int?>("AutenticidadeId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("EntregaExpressa")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("ImgUri")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("REAL");
+                        .HasColumnType("float");
 
                     b.HasKey("ArmaduraId");
 
@@ -63,15 +70,34 @@ namespace ReinosAcoWebApp.Data.Migrations
                 {
                     b.Property<int>("AutenticidadeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AutenticidadeId"));
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AutenticidadeId");
 
                     b.ToTable("Autenticidade");
+                });
+
+            modelBuilder.Entity("ReinosAcoWebApp.Models.Material", b =>
+                {
+                    b.Property<int>("MaterialId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaterialId"));
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaterialId");
+
+                    b.ToTable("Material");
                 });
 
             modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>

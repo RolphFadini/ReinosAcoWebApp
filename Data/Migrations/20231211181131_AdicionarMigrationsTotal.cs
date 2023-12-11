@@ -15,9 +15,9 @@ namespace ReinosAcoWebApp.Data.Migrations
                 name: "Autenticidade",
                 columns: table => new
                 {
-                    AutenticidadeId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Descricao = table.Column<string>(type: "TEXT", nullable: false)
+                    AutenticidadeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,18 +25,31 @@ namespace ReinosAcoWebApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Material",
+                columns: table => new
+                {
+                    MaterialId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Material", x => x.MaterialId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Armadura",
                 columns: table => new
                 {
-                    ArmaduraId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Descricao = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    ImgUri = table.Column<string>(type: "TEXT", nullable: false),
-                    Preco = table.Column<double>(type: "REAL", nullable: false),
-                    EntregaExpressa = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    AutenticidadeId = table.Column<int>(type: "INTEGER", nullable: true)
+                    ArmaduraId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    ImgUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Preco = table.Column<double>(type: "float", nullable: false),
+                    EntregaExpressa = table.Column<bool>(type: "bit", nullable: false),
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AutenticidadeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,6 +72,9 @@ namespace ReinosAcoWebApp.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Armadura");
+
+            migrationBuilder.DropTable(
+                name: "Material");
 
             migrationBuilder.DropTable(
                 name: "Autenticidade");

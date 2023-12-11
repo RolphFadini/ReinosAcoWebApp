@@ -7,6 +7,7 @@ public class ArmaduraDbContext : DbContext
 {
     public DbSet<Armadura> Armadura { get; set; }
     public DbSet<Autenticidade> Autenticidade { get; set; }
+    public DbSet<Material> Material { get; set; } 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -15,9 +16,8 @@ public class ArmaduraDbContext : DbContext
             .AddJsonFile("appsettings.json")
             .Build();
 
-        //var stringConn = config.GetConnectionString("StringConn");
-        var stringConn = config.GetConnectionString("StringConn1");
+        var stringConn = config.GetConnectionString("StringConn");
 
-        optionsBuilder.UseSqlite(stringConn);
+        optionsBuilder.UseSqlServer(stringConn);
     }
 }
