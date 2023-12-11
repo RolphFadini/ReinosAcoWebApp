@@ -1,4 +1,5 @@
-﻿using ReinosAcoWebApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ReinosAcoWebApp.Data;
 using ReinosAcoWebApp.Models;
 
 namespace ReinosAcoWebApp.Services.Data;
@@ -23,6 +24,7 @@ public class ArmaduraService : IArmaduraService
         armaduraEncontrada.EntregaExpressa = armadura.EntregaExpressa;
         armaduraEncontrada.DataCadastro = armadura.DataCadastro;
         armaduraEncontrada.AutenticidadeId = armadura.AutenticidadeId;
+        armaduraEncontrada.Materiais = armadura.Materiais;
 
         _context.SaveChanges();
     }
@@ -42,7 +44,9 @@ public class ArmaduraService : IArmaduraService
 
     public Armadura Obter(int id)
     {
-        return _context.Armadura.SingleOrDefault(item => item.ArmaduraId == id);
+        return _context.Armadura
+                            .Include(item => item.Materiais)
+                            .SingleOrDefault(item => item.ArmaduraId == id);
     }
 
     public IList<Armadura> ObterTodos()
@@ -53,4 +57,6 @@ public class ArmaduraService : IArmaduraService
     public IList<Autenticidade> ObterTodasAutenticidades() => _context.Autenticidade.ToList();
 
     public Autenticidade ObterAutenticidade(int id) => _context.Autenticidade.SingleOrDefault(item => item.AutenticidadeId == id);
+
+    public IList<Material> ObterTodosMateriais() => _context.Material.ToList();
 }

@@ -25,19 +25,6 @@ namespace ReinosAcoWebApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Material",
-                columns: table => new
-                {
-                    MaterialId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Material", x => x.MaterialId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Armadura",
                 columns: table => new
                 {

@@ -42,5 +42,7 @@ public class Armadura
     public DateTime DataCadastro { get; set; }
 
     [DisplayName("Autenticidade")]
-    public int? AutenticidadeId { get; set; }    
+    public int? AutenticidadeId { get; set; }
+
+    public ICollection<Material>? Materiais { get; set; }    
 }

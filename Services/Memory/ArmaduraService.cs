@@ -104,4 +104,9 @@ public class ArmaduraService : IArmaduraService
     {
         throw new NotImplementedException();
     }
+
+    public IList<Material> ObterTodosMateriais()
+    {
+        throw new NotImplementedException();
+    }
 }

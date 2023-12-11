@@ -7,7 +7,7 @@ public class ArmaduraDbContext : DbContext
 {
     public DbSet<Armadura> Armadura { get; set; }
     public DbSet<Autenticidade> Autenticidade { get; set; }
-    public DbSet<Material> Material { get; set; } 
+    public DbSet<Material> Material { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

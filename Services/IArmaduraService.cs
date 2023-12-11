@@ -11,4 +11,5 @@ public interface IArmaduraService
     void Excluir(int id);
     IList<Autenticidade> ObterTodasAutenticidades();
     Autenticidade ObterAutenticidade(int id);
+    IList<Material> ObterTodosMateriais();
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReinosAcoWebApp.Data;
 
@@ -11,9 +12,11 @@ using ReinosAcoWebApp.Data;
 namespace ReinosAcoWebApp.Data.Migrations
 {
     [DbContext(typeof(ArmaduraDbContext))]
-    partial class ArmaduraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231211185736_AdicionarDadosMaterial")]
+    partial class AdicionarDadosMaterial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace ReinosAcoWebApp.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ArmaduraMaterial", b =>
-                {
-                    b.Property<int>("ArmadurasArmaduraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MateriaisMaterialId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ArmadurasArmaduraId", "MateriaisMaterialId");
-
-                    b.HasIndex("MateriaisMaterialId");
-
-                    b.ToTable("ArmaduraMaterial");
-                });
 
             modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>
                 {
@@ -110,21 +98,6 @@ namespace ReinosAcoWebApp.Data.Migrations
                     b.HasKey("MaterialId");
 
                     b.ToTable("Material");
-                });
-
-            modelBuilder.Entity("ArmaduraMaterial", b =>
-                {
-                    b.HasOne("ReinosAcoWebApp.Models.Armadura", null)
-                        .WithMany()
-                        .HasForeignKey("ArmadurasArmaduraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ReinosAcoWebApp.Models.Material", null)
-                        .WithMany()
-                        .HasForeignKey("MateriaisMaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ReinosAcoWebApp.Models.Armadura", b =>
