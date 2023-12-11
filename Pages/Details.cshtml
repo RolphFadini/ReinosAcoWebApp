@@ -31,6 +31,21 @@
                 <label asp-for="Armadura.AutenticidadeId"></label>:
                 @Html.DisplayFor(model => model.DescricaoAutenticidade)
             </li>
+
+            @if(Model.Armadura.Materiais.Count > 0)
+            {
+                <li>
+                    <label asp-for="Armadura.Materiais"></label>:
+                    @string.Join(", ", Model.Armadura.Materiais.Select(item => item.Descricao))
+                </li>
+            }
+            else
+            {
+                <li>
+                    <label asp-for="Armadura.Materiais"></label>: Em análise
+                </li>
+            }
+
         </ul>
         <a class="btn my-3 btn-primary"
         asp-page="/Edit"

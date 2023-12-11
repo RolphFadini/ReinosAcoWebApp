@@ -32,7 +32,6 @@ public class DetailsModel : PageModel
             DescricaoAutenticidade = "Em análise";
         }
 
-
         if (Armadura == null)
         {
             return NotFound();

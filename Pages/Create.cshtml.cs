@@ -11,6 +11,8 @@ namespace ReinosAcoWebApp.Pages;
 public class CreateModel : PageModel
 {
     public SelectList AutenticidadeOptionItems { get; set; }
+    public SelectList MaterialOptionItems { get; set; }
+    
     private IArmaduraService _service;
     private IToastNotification _toastNotification { get; set; }
 
@@ -28,13 +30,24 @@ public class CreateModel : PageModel
         AutenticidadeOptionItems = new SelectList(_service.ObterTodasAutenticidades(),
                                                     nameof(Autenticidade.AutenticidadeId),
                                                     nameof(Autenticidade.Descricao));
+
+        MaterialOptionItems = new SelectList(_service.ObterTodosMateriais(),    
+                                                    nameof(Material.MaterialId),
+                                                    nameof(Material.Descricao));
     }
 
     [BindProperty]
     public Armadura Armadura { get; set; }
 
+    [BindProperty]
+    public IList<int> MaterialIds { get; set; }
+
     public IActionResult OnPost()
     {
+        Armadura.Materiais = _service.ObterTodosMateriais()
+                                     .Where(item => MaterialIds.Contains(item.MaterialId))
+                                     .ToList();
+
         if(!ModelState.IsValid)
         {
             return Page();

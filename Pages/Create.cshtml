@@ -47,9 +47,18 @@
                 <label asp-for="Armadura.AutenticidadeId" class="form-label mt-3"></label>
                 <select class="form-select" asp-for="Armadura.AutenticidadeId"
                         asp-items="Model.AutenticidadeOptionItems">
-                        <option value="">Selecione uma opção</option>
+                    <option value="">Selecione uma opção</option>
                 </select>
                 <span asp-validation-for="Armadura.AutenticidadeId" class="text-danger">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Armadura.Materiais" class="form-label mt-3"></label>
+                <select class="form-select" asp-for="MaterialIds"
+                        asp-items="Model.MaterialOptionItems">
+                </select>
+                <span asp-validation-for="Armadura.Materiais" class="text-danger">
                 </span>
             </div>
 
