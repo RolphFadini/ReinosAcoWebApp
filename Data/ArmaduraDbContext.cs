@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ReinosAcoWebApp.Models;
 
 namespace ReinosAcoWebApp.Data;
 
-public class ArmaduraDbContext : DbContext
+public class ArmaduraDbContext : IdentityDbContext
 {
     public DbSet<Armadura> Armadura { get; set; }
     public DbSet<Autenticidade> Autenticidade { get; set; }

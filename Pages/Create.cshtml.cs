@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using System.Dynamic;
 
 namespace ReinosAcoWebApp.Pages;
 
+[Authorize]
 public class CreateModel : PageModel
 {
     public SelectList AutenticidadeOptionItems { get; set; }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -5,80 +6,80 @@ using NToastNotify;
 using ReinosAcoWebApp.Models;
 using ReinosAcoWebApp.Services;
 
-namespace ReinosAcoWebApp.Pages
+namespace ReinosAcoWebApp.Pages;
+
+[Authorize]
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    public SelectList AutenticidadeOptionItems { get; set; }
+    public SelectList MaterialOptionItems { get; set; }
+
+    private IArmaduraService _service;
+    private IToastNotification _toastNotification { get; set; } 
+
+    public EditModel(IArmaduraService service,
+                     IToastNotification toastNotification)
     {
-        public SelectList AutenticidadeOptionItems { get; set; }
-        public SelectList MaterialOptionItems { get; set; }
+        _service = service;
+        _toastNotification = toastNotification;
+    }
 
-        private IArmaduraService _service;
-        private IToastNotification _toastNotification { get; set; } 
+    [BindProperty]
+    public Armadura Armadura { get; set; }
 
-        public EditModel(IArmaduraService service,
-                         IToastNotification toastNotification)
+    [BindProperty]
+    public IList<int> MaterialIds { get; set; }
+
+    public IActionResult OnGet(int id)
+    {
+        ViewData["Title"] = "Detalhes - Reinos & Aço";
+
+        Armadura = _service.Obter(id);
+
+        MaterialIds = Armadura.Materiais.Select(item => item.MaterialId).ToList();
+
+        if (Armadura == null)
         {
-            _service = service;
-            _toastNotification = toastNotification;
+            return NotFound();
         }
 
-        [BindProperty]
-        public Armadura Armadura { get; set; }
+        AutenticidadeOptionItems = new SelectList(_service.ObterTodasAutenticidades(),
+                                                    nameof(Autenticidade.AutenticidadeId),
+                                                    nameof(Autenticidade.Descricao));
 
-        [BindProperty]
-        public IList<int> MaterialIds { get; set; }
+        MaterialOptionItems = new SelectList(_service.ObterTodosMateriais(),
+                                                nameof(Material.MaterialId),
+                                                nameof(Material.Descricao));
 
-        public IActionResult OnGet(int id)
+        return Page();
+    }
+
+    public IActionResult OnPost()
+    {
+        Armadura.Materiais = _service.ObterTodosMateriais()
+                                 .Where(item => MaterialIds.Contains(item.MaterialId))
+                                 .ToList();
+
+        if (!ModelState.IsValid)
         {
-            ViewData["Title"] = "Detalhes - Reinos & Aço";
-
-            Armadura = _service.Obter(id);
-
-            MaterialIds = Armadura.Materiais.Select(item => item.MaterialId).ToList();
-
-            if (Armadura == null)
-            {
-                return NotFound();
-            }
-
-            AutenticidadeOptionItems = new SelectList(_service.ObterTodasAutenticidades(),
-                                                        nameof(Autenticidade.AutenticidadeId),
-                                                        nameof(Autenticidade.Descricao));
-
-            MaterialOptionItems = new SelectList(_service.ObterTodosMateriais(),
-                                                    nameof(Material.MaterialId),
-                                                    nameof(Material.Descricao));
-
             return Page();
         }
 
-        public IActionResult OnPost()
-        {
-            Armadura.Materiais = _service.ObterTodosMateriais()
-                                     .Where(item => MaterialIds.Contains(item.MaterialId))
-                                     .ToList();
+        //alteração
+        _service.Alterar(Armadura);
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
-            //alteração
-            _service.Alterar(Armadura);
+        return RedirectToPage("/Index");
+    }
 
-            _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
+    public IActionResult OnPostExclusao()
+    {
+        //exclusão
+        _service.Excluir(Armadura.ArmaduraId);
 
-            return RedirectToPage("/Index");
-        }
+        _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
-        public IActionResult OnPostExclusao()
-        {
-            //exclusão
-            _service.Excluir(Armadura.ArmaduraId);
-
-            _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
-
-            return RedirectToPage("/Index");
-        }
+        return RedirectToPage("/Index");
     }
 }
