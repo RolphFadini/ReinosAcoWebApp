@@ -1,0 +1,37 @@
+﻿@page
+@model ReinosAcoWebApp.Pages.Materiais.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Materiais</h1>
+
+<p>
+    <a asp-page="Create">Adicionar novo material</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Material[0].Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Material) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.MaterialId">Editar</a> |
+                <a asp-page="./Details" asp-route-id="@item.MaterialId">Detalhes</a> |
+                <a asp-page="./Delete" asp-route-id="@item.MaterialId">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

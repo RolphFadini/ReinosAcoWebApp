@@ -1,0 +1,37 @@
+﻿@page
+@model ReinosAcoWebApp.Pages.Shared.Autenticidades.IndexModel
+
+@{
+    ViewData["Title"] = "Autenticidades";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Autenticidades</h1>
+
+<p>
+    <a asp-page="Create">Adicionar nova autenticidade</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Autenticidade[0].Descricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Autenticidade) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.AutenticidadeId">Editar</a> |
+                <a asp-page="./Details" asp-route-id="@item.AutenticidadeId">Detalhes</a> |
+                <a asp-page="./Delete" asp-route-id="@item.AutenticidadeId">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
